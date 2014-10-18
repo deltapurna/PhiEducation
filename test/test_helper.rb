@@ -8,4 +8,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def join_as_teacher(room)
+    open_session do |sess|
+      sess.post_via_redirect '/teachers', { room_code: room.code }
+    end
+  end
 end

@@ -6,17 +6,30 @@
 </span>
 </p>
 
-<h2>Question <%= @room.questions.size %></h2>
-<pre><%= @room.questions.last.content %></pre>
+<h2>Question <span class="question-number"><%= @room.questions.size %></span></h2>
+<pre class="current-question"><%= @room.questions.last.content %></pre>
 
 <% if current_teacher %>
-  <%= link_to 'Close Room', room_path(@room), 
-    method: 'delete', data: { confirm: 'Are you sure?' } %>
+  <p><%= link_to 'Close Room', room_path(@room), 
+    method: 'delete', data: { confirm: 'Are you sure?' } %></p>
+  <%= form_for [@room, Question.new], remote: true do |f|%>
+    <pre><%= f.text_area :content %></pre>
+    <p><%= f.select :question_type, [
+      ['Multiple Choice', 'MULTIPLE_CHOICE'],
+      ['True or False', 'TRUE_FALSE'],
+      ['Text', 'TEXT']] %></p>
+    <p><%= f.submit 'Next Question' %></p>
+  <% end %>
 <% end %>
 <script type="text/javascript">
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
   var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
   channel.bind('change_room_status', function(data) {
     $(".room-status").html(data.status);
+  });
+  channel.bind('change_question', function(data) {
+    $(".current-question").html(data.content);
+    $(".question-number").html(data.number);
+    $(".question-number").html(data.number);
   });
 </script>

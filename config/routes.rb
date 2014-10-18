@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'rooms#new'
 
-  resources :rooms
+  resources :rooms do
+    resource :questions
+  end
+
   resources :teachers
 end

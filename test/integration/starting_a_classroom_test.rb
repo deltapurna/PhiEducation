@@ -38,12 +38,4 @@ class StartingAClassroomTest < ActionDispatch::IntegrationTest
     assert_equal 'Question in New Room', Room.last.questions.first.content
     assert_equal true, Room.last.active?
   end
-
-  private
-
-  def join_as_teacher(room)
-    open_session do |sess|
-      sess.post_via_redirect '/teachers', { room_code: room.code }
-    end
-  end
 end

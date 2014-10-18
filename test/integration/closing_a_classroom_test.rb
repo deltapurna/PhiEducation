@@ -20,12 +20,4 @@ class ClosingAClassroomTest < ActionDispatch::IntegrationTest
     assert_equal true, Room.find(room_1.id).active?
     assert_match /failed/, teacher.flash[:alert]
   end
-
-  private
-
-  def join_as_teacher(room)
-    open_session do |sess|
-      sess.post_via_redirect '/teachers', { room_code: room.code }
-    end
-  end
 end
