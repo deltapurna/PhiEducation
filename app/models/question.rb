@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  QUESTION_TYPE = %w(MULTIPLE_CHOICE, TRUE_FALSE, TEXT)
+  QUESTION_TYPE = %w(MULTIPLE_CHOICE TRUE_FALSE TEXT)
 
   belongs_to :room
   has_many :answers

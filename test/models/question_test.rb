@@ -22,9 +22,20 @@ class QuestionTest < ActiveSupport::TestCase
   end
 
   test "question type has to be one of: MULTIPLE_CHOICE, TRUE_FALSE or TEXT" do
-    question = Question.new(content: 'My Question', question_type: 'wrongtype')
+    question = Question.new(
+      content: 'My Question', question_type: 'wrongtype')
     assert_equal false, question.valid?
-    question = Question.new(content: 'My Question', question_type: 'TEXT')
+
+    question = Question.new(
+      content: 'My Question', question_type: 'TEXT')
+    assert_equal true, question.valid?
+
+    question = Question.new(
+      content: 'My Question', question_type: 'MULTIPLE_CHOICE')
+    assert_equal true, question.valid?
+
+    question = Question.new(
+      content: 'My Question', question_type: 'TRUE_FALSE')
     assert_equal true, question.valid?
   end
 end

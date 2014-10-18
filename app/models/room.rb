@@ -3,6 +3,8 @@ class Room < ActiveRecord::Base
   has_many :students
   has_many :questions
 
+  accepts_nested_attributes_for :questions, allow_destroy: true
+
   validates :code, presence: true, uniqueness: true
 
   before_validation :generate_code

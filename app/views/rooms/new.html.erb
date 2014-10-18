@@ -1,0 +1,11 @@
+<h1>Welcome to Phi Education</h1>
+<%= form_for @room do |f| %>
+  <%= f.fields_for :questions do |q| %>
+    <pre><%= q.text_area :content, size: '60x12' %></pre>
+    <p><%= q.select :question_type, [
+      ['Multiple Choice', 'MULTIPLE_CHOICE'],
+      ['True or False', 'TRUE_FALSE'],
+      ['Text', 'TEXT']] %></p>
+  <% end %>
+  <p><%= f.submit %>,</p>
+<% end %>
