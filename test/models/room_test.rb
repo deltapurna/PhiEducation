@@ -16,8 +16,15 @@ class RoomTest < ActiveSupport::TestCase
     assert_equal 'MyQuestion', room.questions.first.content
   end
 
-  test "code has to be present" do
-    room = Room.new(code: nil)
-    assert_equal false, room.valid?
+  test "#generate_code generates unique 4 digits code for the room randomly" do
+    room = Room.new
+    room.generate_code
+    assert_equal 4, room.code.size
+    assert_equal false, Room.exists?(code: room.code)
+  end
+
+  test "call #generate_code before validation" do
+    room = Room.create
+    assert_not_nil room.code
   end
 end
