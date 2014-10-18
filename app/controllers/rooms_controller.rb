@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  before_action :authorize, only: :destroy
+
   def new
     @room = Room.new
     @room.questions.build(
@@ -12,6 +14,7 @@ class RoomsController < ApplicationController
 
   def create
     @room = Room.new(room_params)
+    @room.teacher = current_teacher if current_teacher
 
     if @room.save
       redirect_to room_path(@room)
@@ -20,10 +23,23 @@ class RoomsController < ApplicationController
     end
   end
 
+  def destroy
+    room = Room.find(params[:id])
+    if room && room.teacher == current_teacher
+      room.update!(closed_at: Time.now)
+      Pusher["room_#{room.id}_channel"].trigger('change_room_status', {
+        status: 'closed'
+      })
+      redirect_to root_path, notice: 'successfully closed the room'
+    else
+      redirect_to room_path(room), alert: 'failed to close the room'
+    end
+  end
+
   private
 
   def room_params
     params.require(:room).permit(
-      questions_attributes: [:content, :question_type])
+      :closed_at, questions_attributes: [:content, :question_type])
   end
 end

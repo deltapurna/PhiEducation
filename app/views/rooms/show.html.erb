@@ -1,10 +1,18 @@
 <h1>Welcome to Your Classroom</h1>
 <p>Code: <%= @room.code %></p>
-<p>Status: <span class="room-status"><%= @room.active? ? 'active' : 'closed' %></span></p>
+<p>Status: 
+<span class="room-status">
+  <%= @room.active? ? 'active' : 'closed' %>
+</span>
+</p>
 
 <h2>Question <%= @room.questions.size %></h2>
 <pre><%= @room.questions.last.content %></pre>
 
+<% if current_teacher %>
+  <%= link_to 'Close Room', room_path(@room), 
+    method: 'delete', data: { confirm: 'Are you sure?' } %>
+<% end %>
 <script type="text/javascript">
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
   var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
