@@ -7,12 +7,16 @@ class Room < ActiveRecord::Base
 
   validates :code, presence: true, uniqueness: true
 
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   def generate_code
     self.code = loop do
       code = ('a'..'z').to_a.concat((0..9).to_a).shuffle[0..3].join
       break code unless self.class.exists?(code: code)
     end
+  end
+
+  def active?
+    !!teacher && !closed_at
   end
 end

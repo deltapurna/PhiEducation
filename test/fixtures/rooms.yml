@@ -5,5 +5,4 @@ one:
   teacher: one
 
 two:
-  code: MyString
-  teacher_id: 1
+  code: 1ABC

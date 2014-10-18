@@ -2,10 +2,10 @@
 
 one:
   content: MyQuestion
-  question_type: MULTIPE_CHOICE
+  question_type: MULTIPLE_CHOICE
   room: one
 
 two:
   content: MyText
   question_type: TRUE_FALSE
-  room_id: 1
+  room: two

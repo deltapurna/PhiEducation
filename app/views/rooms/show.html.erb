@@ -1,5 +1,6 @@
 <h1>Welcome to Your Classroom</h1>
 <p>Code: <%= @room.code %></p>
+<p>Status: <%= @room.active? ? 'active' : 'closed' %>
 
 <h2>Question <%= @room.questions.size %></h2>
 <pre><%= @room.questions.last.content %></pre>
