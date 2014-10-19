@@ -18,6 +18,23 @@ class AnsweringAQuestionTest < ActionDispatch::IntegrationTest
     assert_equal 'a', JSON.parse(student.response.body)['content']
   end
 
+  test "can't answer a question if already answered" do
+    room = rooms(:one)
+    question = room.questions.last
+    student = join_as_student(room) # prepare the session
+
+    student.post "/questions/#{question.id}/answers", { answer: {
+      content: 'a'
+    }}
+    assert_equal 201, student.response.status
+    assert_equal Mime::JSON, student.response.content_type
+    assert_equal 'a', JSON.parse(student.response.body)['content']
+
+    # 2nd attempt can't even retrieve the form
+    student.get "/questions/#{question.id}/answers/new"
+    assert_match /not authorized/, student.flash[:error]
+  end
+
   test "can't answer a question if not a student" do
     room = rooms(:one)
     question = room.questions.last

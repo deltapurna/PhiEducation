@@ -6,7 +6,11 @@
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
   var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
 
-  get_answer_form('<%= new_question_answer_path(@room.questions.last) %>');
+  <% if policy(@room.questions.last.answers.build).new? %>
+    get_answer_form('<%= new_question_answer_path(@room.questions.last) %>');
+  <% else %>
+    $(".answer-form").html('You have submitted your answer!');
+  <% end %>
   function get_answer_form(url) {
     $.get(url, function(data){
       $(".answer-form").html(data);
@@ -22,5 +26,9 @@
   });
   channel.bind('new_student', function(data) {
     $(".room-student-number").html(data.size);
+  });
+  
+  $("body").on("ajax:success", "#new_answer", function(){
+      $(".answer-form").html('You have submitted your answer!');
   });
 </script>

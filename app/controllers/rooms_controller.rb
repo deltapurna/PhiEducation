@@ -26,6 +26,7 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     authorize @room
     @room.teacher = current_teacher if current_teacher
+    session[:student_id] = nil if current_student
 
     if @room.save
       redirect_to room_path(@room)

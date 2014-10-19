@@ -4,6 +4,8 @@ class AnswersController < ApplicationController
   def new
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build
+    @answer.student = current_student if current_student
+
     authorize @answer
 
     case @question.question_type
@@ -19,6 +21,8 @@ class AnswersController < ApplicationController
   def create
     question = Question.find(params[:question_id])
     answer = question.answers.build(answer_params)
+    answer.student = current_student if current_student
+
     authorize answer
 
     if answer.save

@@ -6,6 +6,6 @@ class AnswerPolicy < ApplicationPolicy
   end
 
   def create?
-    user.try(:room) == record.question.room
+    user.try(:room) == record.question.room && !record.class.exists?(student: user)
   end
 end

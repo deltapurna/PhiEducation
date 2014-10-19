@@ -8,22 +8,6 @@
   <% end %>
 </ul>
 
-<% if current_teacher %>
-  <h4>Control the Classroom</h4>
-  <p><%= link_to 'Close Room', room_path(@room),
-    method: 'delete', data: { confirm: 'Are you sure?' } %></p>
-  <%= form_for [@room, Question.new], remote: true do |f|%>
-    <%= render 'questions/form', f:f %>
-   <p><%= f.submit 'Next Question' %></p>
-  <% end %>
-<% end %>
-
-<% if current_student %>
-  <h4>Answer the Question</h4>
-  <div class="answer-form">
-  </div>
-<% end %>
-
 <script type="text/javascript">
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
   var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
