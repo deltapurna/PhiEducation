@@ -2,9 +2,10 @@
 <p>Code: <%= @room.code %></p>
 <p>Status: 
 <span class="room-status">
-  <%= @room.active? ? 'active' : 'closed' %>
-</span>
-</p>
+  <%= @room.active? ? 'active' : 'closed' %></span></p>
+<p>Number of Student: 
+  <span class="room-student-number">
+    <%= @room.students.size %></span></p>
 
 <h2>Question <span class="question-number"><%= @room.questions.size %></span></h2>
 <pre class="current-question"><%= @room.questions.last.content %></pre>
@@ -27,5 +28,8 @@
     $(".current-question").html(data.content);
     $(".question-number").html(data.number);
     $("#question_content").val('');
+  });
+  channel.bind('new_student', function(data) {
+    $(".room-student-number").html(data.size);
   });
 </script>
