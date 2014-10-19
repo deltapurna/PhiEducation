@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class JoiningClassroomAsTeacherTest < ActionDispatch::IntegrationTest
+  setup do
+    stub_request(:any, /api.pusherapp.com*/).
+      to_return(body: { key: 'value' }.to_json, status: 200)
+  end
+
   test "joining an existing classroom" do
     get '/teachers/new'
     assert_response 200

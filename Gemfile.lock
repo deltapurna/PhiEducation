@@ -27,6 +27,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (5.0.1.20140414130214)
     autoprefixer-rails (3.1.2.20141016)
       execjs
@@ -48,6 +49,8 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     columnize (0.8.9)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.2.2)
@@ -118,6 +121,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.2)
       json (~> 1.4)
+    safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -150,6 +154,9 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    webmock (1.19.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
 
 PLATFORMS
   ruby
@@ -172,3 +179,4 @@ DEPENDENCIES
   spring
   sqlite3
   uglifier (>= 1.3.0)
+  webmock

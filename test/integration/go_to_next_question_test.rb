@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class GoToNextQuestionTest < ActionDispatch::IntegrationTest
+  setup do
+    stub_request(:any, /api.pusherapp.com*/).
+      to_return(body: { key: 'value' }.to_json, status: 200)
+  end
+
   test "go to next question once the teacher trigger" do
     room = rooms(:two)
     teacher = join_as_teacher(room)

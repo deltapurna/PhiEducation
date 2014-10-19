@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class StartingAClassroomTest < ActionDispatch::IntegrationTest
+  setup do
+    stub_request(:any, /api.pusherapp.com*/).
+      to_return(body: { key: 'value' }.to_json, status: 200)
+  end
+
   test "starting a room redirect to the room and display the room code" do
     get '/'
     assert_response 200

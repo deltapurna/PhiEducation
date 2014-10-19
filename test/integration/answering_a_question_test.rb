@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class AnsweringAQuestionTest < ActionDispatch::IntegrationTest
+  setup do
+    stub_request(:any, /api.pusherapp.com*/).
+      to_return(body: { key: 'value' }.to_json, status: 200)
+  end
+
   test "answering a question by the associated student" do
     room = rooms(:one)
     question = room.questions.last

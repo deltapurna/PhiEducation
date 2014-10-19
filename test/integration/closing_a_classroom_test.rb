@@ -1,6 +1,11 @@
 require 'test_helper'
 
 class ClosingAClassroomTest < ActionDispatch::IntegrationTest
+  setup do
+    stub_request(:any, /api.pusherapp.com*/).
+      to_return(body: { key: 'value' }.to_json, status: 200)
+  end
+
   test "closing a classroom by the associated teacher" do
     room = rooms(:two)
     teacher = join_as_teacher(room)
