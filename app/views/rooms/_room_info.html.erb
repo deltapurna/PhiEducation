@@ -3,7 +3,7 @@
   <a class="navbar-brand">Welcome to the Classroom!</a>
   <p class="navbar-text">Code: <code><strong><%= @room.code %></strong></code></p> 
   <p class="navbar-text">Status:
-  <span class="room-status badge">
+  <span class="room-status label <%= @room.active? ? 'label-primary' : 'label-default' %>">
     <%= @room.active? ? 'active' : 'closed' %></span></p>
   <p class="navbar-text">Number of Student:
   <span class="room-student-number badge">

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   resources :teachers
   resources :students
+
+  get '/s/:room_code/', to: 'students#create', as: :student_code
+  get '/t/:room_code/', to: 'teachers#create', as: :teacher_code
 end

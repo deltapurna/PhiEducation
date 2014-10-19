@@ -23,4 +23,12 @@ class JoiningClassroomAsTeacherTest < ActionDispatch::IntegrationTest
     assert_response 200
     assert_match /failed/, flash[:alert]
   end
+
+  test "joining via direct url" do
+    get_via_redirect "/t/#{rooms(:two).code}"
+    assert assigns(:room)
+    teacher = Teacher.last
+    assert_equal teacher.id, session[:teacher_id]
+    assert_equal '1ABC', teacher.rooms.first.code
+  end
 end

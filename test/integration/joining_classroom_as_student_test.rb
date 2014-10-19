@@ -26,4 +26,12 @@ class JoiningClassroomAsStudentTest < ActionDispatch::IntegrationTest
     post_via_redirect '/students', { room_code: 'wrongcode' }
     assert_match /invalid/, flash[:alert]
   end
+
+  test "joining with direct url" do
+    get_via_redirect "/s/#{rooms(:one).code}"
+    assert assigns(:room)
+    student = Student.last
+    assert_equal student.id, session[:student_id]
+    assert_equal 'ABC1', student.room.code
+  end
 end

@@ -1,5 +1,7 @@
-<h1>Welcome to Phi Education<br>
-<small>a real time Q & A for your classroom interaction</small></h1>
+<div class="page-header">
+  <h1>Welcome to Phi Education<br>
+    <small>a real time Q & A for your classroom interaction</small></h1>
+</div>
 <%= form_for @room do |f| %>
   <%= f.fields_for :questions do |q| %>
     <%= render 'questions/form', f:q %>

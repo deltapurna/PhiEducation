@@ -24,7 +24,15 @@
   }
 
   channel.bind('change_room_status', function(data) {
-    $(".room-status").html(data.status);
+    var status = $(".room-status");
+    status.html(data.status);
+    if (status.hasClass('label-default')) {
+      status.removeClass('label-default');
+      status.addClass('label-primary');
+    } else {
+      status.removeClass('label-primary');
+      status.addClass('label-default');
+    }
   });
   channel.bind('change_question', function(data) {
     $(".current-question").html(data.content);
