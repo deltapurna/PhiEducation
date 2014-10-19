@@ -38,4 +38,12 @@ class QuestionTest < ActiveSupport::TestCase
       content: 'My Question', question_type: 'TRUE_FALSE')
     assert_equal true, question.valid?
   end
+
+  test "#have_answered? will check if a student have answered the question" do
+    question = questions(:one)
+    student_1 = students(:one)
+    student_2 = students(:two)
+    assert_equal true, question.have_answered?(student_1)
+    assert_equal false, question.have_answered?(student_2)
+  end
 end

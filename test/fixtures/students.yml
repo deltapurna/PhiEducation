@@ -4,4 +4,4 @@ one:
   room: one
 
 two:
-  room_id: MyString
+  room: one

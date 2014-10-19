@@ -6,4 +6,8 @@ class Question < ActiveRecord::Base
 
   validates :content, :question_type, presence: true
   validates :question_type, inclusion: { in: QUESTION_TYPE }
+
+  def have_answered?(student)
+    answers.exists?(student: student)
+  end
 end

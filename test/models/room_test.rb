@@ -8,7 +8,7 @@ class RoomTest < ActiveSupport::TestCase
 
   test "has many students" do
     room = rooms(:one)
-    assert_equal students(:one).id, room.students.first.id
+    assert_equal students(:one).id, room.students.last.id
   end
 
   test "has many questions" do
