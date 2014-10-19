@@ -1,0 +1,23 @@
+<h4>Control the Classroom</h4>
+<%= render 'room_info' %>
+<p><%= link_to 'Close Room', room_path(@room),
+  method: 'delete', data: { confirm: 'Are you sure?' } %></p>
+<%= form_for [@room, Question.new], remote: true do |f|%>
+  <%= render 'questions/form', f:f %>
+  <p><%= f.submit 'Next Question' %></p>
+<% end %>
+<script type="text/javascript">
+  var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
+  var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
+
+  channel.bind('change_question', function(data) {
+    $(".question-number").html(data.number);
+    $("#question_content").val('');
+  });
+  channel.bind('change_room_status', function(data) {
+    $(".room-status").html(data.status);
+  });
+  channel.bind('new_student', function(data) {
+    $(".room-student-number").html(data.size);
+  });
+</script>

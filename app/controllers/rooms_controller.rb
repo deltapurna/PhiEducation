@@ -12,6 +12,14 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     authorize @room
+
+    if session[:teacher_id]
+      render :show_teacher
+    elsif session[:student_id]
+      render :show_student
+    else
+      render :show
+    end
   end
 
   def create

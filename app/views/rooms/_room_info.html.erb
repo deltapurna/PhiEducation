@@ -1,0 +1,9 @@
+<p>Code: <%= @room.code %></p>
+<p>Status:
+<span class="room-status">
+  <%= @room.active? ? 'active' : 'closed' %></span></p>
+<p>Number of Student:
+  <span class="room-student-number">
+    <%= @room.students.size %></span></p>
+
+<h2>Question <span class="question-number"><%= @room.questions.size %></span></h2>

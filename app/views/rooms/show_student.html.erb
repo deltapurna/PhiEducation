@@ -1,0 +1,26 @@
+<h4>Answer the Question</h4>
+<%= render 'room_info' %>
+<div class="answer-form">
+</div>
+<script type="text/javascript">
+  var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
+  var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
+
+  get_answer_form('<%= new_question_answer_path(@room.questions.last) %>');
+  function get_answer_form(url) {
+    $.get(url, function(data){
+      $(".answer-form").html(data);
+    });
+  }
+
+  channel.bind('change_room_status', function(data) {
+    $(".room-status").html(data.status);
+  });
+  channel.bind('change_question', function(data) {
+    $(".question-number").html(data.number);
+    get_answer_form(data.answer_url);
+  });
+  channel.bind('new_student', function(data) {
+    $(".room-student-number").html(data.size);
+  });
+</script>

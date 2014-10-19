@@ -1,15 +1,6 @@
 <h1>Welcome to Your Classroom</h1>
-<p>Code: <%= @room.code %></p>
-<p>Status:
-<span class="room-status">
-  <%= @room.active? ? 'active' : 'closed' %></span></p>
-<p>Number of Student:
-  <span class="room-student-number">
-    <%= @room.students.size %></span></p>
-
-<h2>Question <span class="question-number"><%= @room.questions.size %></span></h2>
+<%= render 'room_info' %>
 <pre class="current-question"><%= @room.questions.last.content %></pre>
-
 <h3>Answers (<span class="answers-count"><%= @room.questions.last.answers.size %></span>)</h3>
 <ul class="question-answers">
   <% @room.questions.last.answers.each do |answer| %>
@@ -37,21 +28,12 @@
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
   var channel = pusher.subscribe('room_'+<%= @room.id %>+'_channel');
 
-  get_answer_form('<%= new_question_answer_path(@room.questions.last) %>');
-  function get_answer_form(url) {
-    $.get(url, function(data){
-      $(".answer-form").html(data);
-    });
-  }
-
   channel.bind('change_room_status', function(data) {
     $(".room-status").html(data.status);
   });
   channel.bind('change_question', function(data) {
     $(".current-question").html(data.content);
     $(".question-number").html(data.number);
-    $("#question_content").val('');
-    get_answer_form(data.answer_url);
     $(".answers-count").html('0');
     $(".question-answers").html('');
   });
