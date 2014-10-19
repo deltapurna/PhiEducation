@@ -1,5 +1,8 @@
 <%= form_for [@question, @answer], remote: true do |f| %>
-  <p><%= f.label :content, 'Fill up your answer below' %></p>
-  <p><%= f.text_area :content %></p>
-  <p><%= f.submit 'Answer!' %></p>
+  <div class='form-group'>
+    <%= f.text_area :content, class: 'form-control' %>
+  </div>
+  <div>
+  <%= f.submit 'Answer!', class: 'btn btn-primary' %>
+  </div>
 <% end %>

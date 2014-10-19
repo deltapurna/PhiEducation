@@ -1,11 +1,21 @@
 <%= form_for [@question, @answer], remote: true do |f| %>
-  <%= f.radio_button :content, 'a' %>
-  <%= f.label :content, 'A' %>
-  <%= f.radio_button :content, 'b' %>
-  <%= f.label :content, 'B' %>
-  <%= f.radio_button :content, 'c' %>
-  <%= f.label :content, 'C' %>
-  <%= f.radio_button :content, 'd' %>
-  <%= f.label :content, 'D' %>
-  <%= f.submit 'Answer!' %>
+  <div class="radio-inline">
+    <%= f.radio_button :content, 'a' %>
+    <%= f.label :content, 'A' %>
+  </div>
+  <div class="radio-inline">
+    <%= f.radio_button :content, 'b' %>
+    <%= f.label :content, 'B' %>
+  </div>
+  <div class="radio-inline">
+    <%= f.radio_button :content, 'c' %>
+    <%= f.label :content, 'C' %>
+  </div>
+  <div class="radio-inline">
+    <%= f.radio_button :content, 'd' %>
+    <%= f.label :content, 'D' %>
+  </div>
+  <div>
+  <%= f.submit 'Answer!', class: 'btn btn-primary' %>
+  </div>
 <% end %>

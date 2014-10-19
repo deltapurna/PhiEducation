@@ -1,9 +1,15 @@
-<p>Code: <%= @room.code %></p>
-<p>Status:
-<span class="room-status">
-  <%= @room.active? ? 'active' : 'closed' %></span></p>
-<p>Number of Student:
-  <span class="room-student-number">
+<nav class="navbar navbar-default">
+<div class="container">
+  <a class="navbar-brand">Welcome to the Classroom!</a>
+  <p class="navbar-text">Code: <code><strong><%= @room.code %></strong></code></p> 
+  <p class="navbar-text">Status:
+  <span class="room-status badge">
+    <%= @room.active? ? 'active' : 'closed' %></span></p>
+  <p class="navbar-text">Number of Student:
+  <span class="room-student-number badge">
     <%= @room.students.size %></span></p>
+  <p class="navbar-text">Question No: 
+  <span class="question-number badge"><%= @room.questions.size %></span></p>
+</div>
+</nav>
 
-<h2>Question <span class="question-number"><%= @room.questions.size %></span></h2>

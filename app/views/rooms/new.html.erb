@@ -1,10 +1,11 @@
-<h1>Welcome to Phi Education</h1>
+<h1>Welcome to Phi Education<br>
+<small>a real time Q & A for your classroom interaction</small></h1>
 <%= form_for @room do |f| %>
   <%= f.fields_for :questions do |q| %>
     <%= render 'questions/form', f:q %>
   <% end %>
-  <p><%= f.submit 'Create your classroom!' %></p>
+  <p><%= f.submit 'Create your classroom!', class: 'btn btn-primary btn-lg' %></p>
 <% end %>
 
-<h2>Already have one? <%= link_to 'Go to your classroom', new_teacher_path %></h2>
-<h2>Student? <%= link_to 'Click here', new_student_path %></h2>
+<h5>Already have one? <%= link_to 'Go to your classroom', new_teacher_path %></h5>
+<h5>Student? <%= link_to 'Click here', new_student_path %></h5>

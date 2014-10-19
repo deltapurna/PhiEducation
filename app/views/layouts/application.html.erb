@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PhiEducation</title>
+  <title>Phi Education</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <script src="http://js.pusher.com/2.0/pusher.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% if alert %>
-    <p><small><%= alert %></small></p>
-  <% end %>
-  <% if notice %>
-    <p><small><%= notice %></small></p>
-  <% end %>
-<%= yield %>
+  <div class="container">
+    <% if alert %>
+      <div class="alert alert-warning" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+    <% if notice %>
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+    <% if flash[:error] %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:error] %>
+      </div>
+    <% end %>
 
+    <%= yield %>
+  </div>
 </body>
 </html>

@@ -1,6 +1,12 @@
-<pre><%= f.text_area :content, size: '60x12' %></pre>
-<p><%= f.select :question_type, [
-  ['Multiple Choice', 'MULTIPLE_CHOICE'],
-  ['True or False', 'TRUE_FALSE'],
-  ['Text', 'TEXT']] %></p>
+<div class="form-group">
+<%= f.label :content, "Type your question below:" %>
+<%= f.text_area :content, size: '60x8', class: 'form-control input-lg' %>
+</div>
+<div class="form-group">
+  <%= f.label :question_type, 'Specify the question type:' %>
+  <%= f.select :question_type, [
+    ['Multiple Choice', 'MULTIPLE_CHOICE'],
+    ['True or False', 'TRUE_FALSE'],
+    ['Text', 'TEXT']], {}, class: 'form-control' %>
+  </div>
  

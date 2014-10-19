@@ -1,6 +1,12 @@
-<h4>Answer the Question</h4>
 <%= render 'room_info' %>
-<div class="answer-form">
+<div class="row">
+  <div class="col-md-6">
+    <h3><small>Current Question</small></h3>
+    <pre class="current-question"><%= @room.questions.last.content %></pre>
+  </div>
+  <h3><small>Your Answer?</small></h3>
+  <div class="col-md-6 answer-form">
+  </div>
 </div>
 <script type="text/javascript">
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY
@@ -21,6 +27,7 @@
     $(".room-status").html(data.status);
   });
   channel.bind('change_question', function(data) {
+    $(".current-question").html(data.content);
     $(".question-number").html(data.number);
     get_answer_form(data.answer_url);
   });

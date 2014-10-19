@@ -1,12 +1,18 @@
-<h1>Welcome to Your Classroom</h1>
 <%= render 'room_info' %>
-<pre class="current-question"><%= @room.questions.last.content %></pre>
-<h3>Answers (<span class="answers-count"><%= @room.questions.last.answers.size %></span>)</h3>
-<ul class="question-answers">
-  <% @room.questions.last.answers.each do |answer| %>
-    <li><%= answer.content %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6">
+    <h3><small>Question <span class="question-number"><%= @room.questions.size %></span></small></h3>
+    <pre class="current-question"><%= @room.questions.last.content %></pre>
+  </div>
+  <div class="col-md-6">
+    <h3><small>Answers (<span class="answers-count"><%= @room.questions.last.answers.size %></span>)</small></h3>
+    <ul class="question-answers">
+      <% @room.questions.last.answers.each do |answer| %>
+        <li><%= answer.content %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 <script type="text/javascript">
   var pusher = new Pusher('<%= Pusher.key %>'); // uses your APP KEY

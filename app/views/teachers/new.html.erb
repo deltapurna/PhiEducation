@@ -1,7 +1,10 @@
-<h1>Hello the Awesomest Teacher!</h1>
+<h2>Hello the Awesomest Teacher!<br>
+<small>Ready to rock the classroom?</small></h2>
 
-<h2>Please insert your room code</h2>
-<%= form_tag :teachers do %>
-  <p><%= text_field_tag :room_code %></p>
-  <p><%= submit_tag %></p>
+<%= form_tag(:teachers, class: 'form-inline')  do %>
+  <div class="form-group">
+    <%= label_tag :room_code, 'Insert your room code:' %>
+    <%= text_field_tag :room_code, '', class: 'form-control' %>
+  </div>
+  <p><%= submit_tag "Let's roll!", class: 'btn btn-primary' %></p>
 <% end %>

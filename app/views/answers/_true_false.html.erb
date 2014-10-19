@@ -1,7 +1,13 @@
 <%= form_for [@question, @answer], remote: true do |f| %>
-  <%= f.radio_button :content, 'true' %>
-  <%= f.label :content, 'True' %>
-  <%= f.radio_button :content, 'false' %>
-  <%= f.label :content, 'False' %>
-  <%= f.submit 'Answer!' %>
+  <div class="radio-inline">
+    <%= f.radio_button :content, 'true' %>
+    <%= f.label :content, 'True' %>
+  </div>
+  <div class="radio-inline">
+    <%= f.radio_button :content, 'false' %>
+    <%= f.label :content, 'False' %>
+  </div>
+  <div>
+  <%= f.submit 'Answer!', class: 'btn btn-primary' %>
+  </div>
 <% end %>
