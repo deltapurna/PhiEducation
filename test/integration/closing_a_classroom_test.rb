@@ -18,6 +18,6 @@ class ClosingAClassroomTest < ActionDispatch::IntegrationTest
     teacher.delete_via_redirect "/rooms/#{room_1.id}"
 
     assert_equal true, Room.find(room_1.id).active?
-    assert_match /failed/, teacher.flash[:alert]
+    assert_match /not authorized/, teacher.flash[:error]
   end
 end

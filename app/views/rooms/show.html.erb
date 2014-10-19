@@ -13,12 +13,8 @@
   <p><%= link_to 'Close Room', room_path(@room), 
     method: 'delete', data: { confirm: 'Are you sure?' } %></p>
   <%= form_for [@room, Question.new], remote: true do |f|%>
-    <pre><%= f.text_area :content %></pre>
-    <p><%= f.select :question_type, [
-      ['Multiple Choice', 'MULTIPLE_CHOICE'],
-      ['True or False', 'TRUE_FALSE'],
-      ['Text', 'TEXT']] %></p>
-    <p><%= f.submit 'Next Question' %></p>
+    <%= render 'questions/form', f:f %>
+   <p><%= f.submit 'Next Question' %></p>
   <% end %>
 <% end %>
 <script type="text/javascript">
@@ -30,6 +26,6 @@
   channel.bind('change_question', function(data) {
     $(".current-question").html(data.content);
     $(".question-number").html(data.number);
-    $(".question-number").html(data.number);
+    $("#question_content").val('');
   });
 </script>

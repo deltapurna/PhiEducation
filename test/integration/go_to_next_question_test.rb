@@ -23,6 +23,6 @@ class GoToNextQuestionTest < ActionDispatch::IntegrationTest
       question_type: 'TRUE_FALSE'
     }}
 
-    assert_match /Unauthorized/, flash[:alert]
+    assert_match /not authorized/, flash[:error]
   end
 end

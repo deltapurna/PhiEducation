@@ -1,9 +1,10 @@
 class QuestionsController < ApplicationController
-  before_action :authorize
+  after_action :verify_authorized
 
   def create
     room = Room.find(params[:room_id])
     question = room.questions.build(question_params)
+    authorize question
 
     if question.save
       Pusher["room_#{room.id}_channel"].trigger('change_question', {
@@ -14,6 +15,10 @@ class QuestionsController < ApplicationController
     else
       render json: question.errors, status: 422
     end
+  end
+
+  def pundit_user
+    current_teacher
   end
 
   private
