@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     resource :questions
   end
 
+  resources :questions, only: [] do
+    resources :answers
+  end
+
   resources :teachers
   resources :students
 end

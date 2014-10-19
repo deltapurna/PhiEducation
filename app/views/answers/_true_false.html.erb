@@ -1,0 +1,7 @@
+<%= form_for [@question, @answer], remote: true do |f| %>
+  <%= f.radio_button :content, 'true' %>
+  <%= f.label :content, 'True' %>
+  <%= f.radio_button :content, 'false' %>
+  <%= f.label :content, 'False' %>
+  <%= f.submit 'Answer!' %>
+<% end %>

@@ -13,4 +13,10 @@ class ActiveSupport::TestCase
       sess.post_via_redirect '/teachers', { room_code: room.code }
     end
   end
+
+  def join_as_student(room)
+    open_session do |sess|
+      sess.post_via_redirect '/students', { room_code: room.code }
+    end
+  end
 end

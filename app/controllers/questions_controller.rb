@@ -9,7 +9,8 @@ class QuestionsController < ApplicationController
     if question.save
       Pusher["room_#{room.id}_channel"].trigger('change_question', {
         content: question.content,
-        number: room.questions.size
+        number: room.questions.size,
+        answer_url: new_question_answer_path(question)
       })
       render json: question, status: 201
     else
