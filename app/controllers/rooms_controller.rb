@@ -50,7 +50,7 @@ class RoomsController < ApplicationController
   end
 
   def pundit_user
-    current_teacher
+    current_teacher || current_student
   end
 
   private
